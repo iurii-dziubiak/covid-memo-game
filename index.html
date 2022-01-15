@@ -1,12 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Javascript Game</title>
+    <title>JS Game</title>
     <meta charset="UTF-8">
-    <!-- http://proger.i-forge.net/The_smallest_transparent_pixel/ -->
-    <link rel="icon" href="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=">
+    <!-- STYLESHEETS -->
+     <!-- Include Materialize front-end framework based on Material Design CSS File-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="style.css"/>
+    <!-- SCRIPTS -->
+    <!-- Include Materialize front-end framework based on Material Design JavaScript File -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script defer src="main.js"></script>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1>Crazy Memory Game</h1>
+        </header>
 
+        <section class="score-panel">
+            <h3>Score Panel</h3>
+
+            <h5>Lives: <span class="player-lives"></span></h5>
+
+            <div class="timer-container">
+                <h5><span class="timer">Timer: 00:00</span></h5>
+            </div>
+
+            <button class="btn waves-effect waves-light light-blue darken-3" id="reset-btn">Reset</button>
+        </section>
+
+        <section class="game-board"></section>
+    </div>
 </body>
 </html>
