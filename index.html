@@ -5,32 +5,33 @@
     <meta charset="UTF-8">
     <!-- STYLESHEETS -->
      <!-- Include Materialize front-end framework based on Material Design CSS File-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
     <link rel="stylesheet" href="style.css"/>
     <!-- SCRIPTS -->
     <!-- Include Materialize front-end framework based on Material Design JavaScript File -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script defer src="main.js"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>-->
+    <script defer src="game.js"></script>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Crazy Memory Game</h1>
+            <h1>COVID Memory Game</h1>
         </header>
 
         <section class="score-panel">
-            <h3>Score Panel</h3>
+            <h2>Score Panel</h2>
 
-            <h5>Lives: <span class="player-lives"></span></h5>
+            <h4>Lives: <span class="player-lives"></span></h4>
 
             <div class="timer-container">
-                <h5><span class="timer">Timer: 00:00</span></h5>
+                <h4><span class="timer">Timer: 00:00</span></h4>
             </div>
 
-            <button class="btn waves-effect waves-light light-blue darken-3" id="reset-btn">Reset</button>
+            <button class="btn waves-effect waves-light pink darken-2" id="reset-btn">Reset</button>
         </section>
 
-        <section class="game-board"></section>
+        <section class="game-board">
+        </section>
     </div>
 </body>
 </html>
