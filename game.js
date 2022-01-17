@@ -1,6 +1,7 @@
 const section = document.querySelector(".game-board");
 const playerLivesCounter = document.querySelector(".player-lives");
-let playerLives = 7;
+const resetBtn = document.getElementById("reset-btn");
+let playerLives = 6;
 
 //UI set player lives
 playerLivesCounter.textContent = playerLives.toString();
@@ -33,7 +34,7 @@ const randomize = () => {
 }
 
 //Card generator
-const cardGenerator = () => {
+const initGame = () => {
     const cards = randomize();
     cards.forEach((item) => {
         const card = document.createElement("div");
@@ -56,39 +57,42 @@ const cardGenerator = () => {
             checkCards(evn);
         })
     });
+    resetBtn.addEventListener("click", reset);
 };
 
 //Check Cards
 const checkCards = (evn) => {
     const clickedCard = evn.target;
     clickedCard.classList.add("flipped");
+    //Make toggled card not clickable until checking
+    clickedCard.style.pointerEvents = "none";
     const flippedCards = document.querySelectorAll(".flipped");
     const toggledCards = document.querySelectorAll(".toggledCard");
 
     if(flippedCards.length === 2) {
+        //IF RIGHT
         if(flippedCards[0].getAttribute("name") === flippedCards[1].getAttribute("name")) {
-            console.log("RIGHT")
             flippedCards.forEach(card => {
                 card.classList.remove("flipped");
                 card.style.pointerEvents = "none";
             });
-
         } else {
-            console.log("WRONG")
+        //IF WRONG
             flippedCards.forEach(card => {
                 card.classList.remove("flipped");
-                setTimeout(() => card.classList.remove("toggledCard"), 700);
+                setTimeout(() => card.classList.remove("toggledCard"), 800);
+                card.style.pointerEvents = "all";
             });
             playerLives--;
             playerLivesCounter.textContent = playerLives.toString();
             if (playerLives === 0) {
-                reset();
+                setTimeout(() => reset(), 800);
             }
         }
     }
     //Check if we won the game
     if (toggledCards.length === 16) {
-        reset();
+        setTimeout(() => reset(), 800);
     }
 }
 
@@ -97,6 +101,7 @@ const reset = () => {
     let cardData = randomize();
     const faces = document.querySelectorAll(".face")
     const cards = document.querySelectorAll(".card")
+    //Make cards not clickable before reset finished
     section.style.pointerEvents = "none";
     cardData.forEach((item,index) => {
         cards[index].classList.remove("toggledCard");
@@ -109,31 +114,8 @@ const reset = () => {
             section.style.pointerEvents = "all";
         }, 1000);
     });
-    playerLives = 7;
+    playerLives = 6;
     playerLivesCounter.textContent = playerLives.toString();
 }
 
-cardGenerator();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 initGame();
-
-function initGame() {
-
-    // Your game can start here, but define separate functions, don't write everything in here :)
-
-}
