@@ -2,6 +2,7 @@ const section = document.querySelector(".game-board");
 const playerLivesCounter = document.querySelector(".player-lives");
 const resetBtn = document.getElementById("reset-btn");
 const timer = document.getElementById("timer");
+const modalTimer = document.getElementById("modal-timer");
 const closeModalBtn = document.querySelectorAll("[data-close-button]")
 const overlay = document.getElementById("overlay")
 let playerLives = 7;
@@ -179,6 +180,7 @@ const openModal = (modal) => {
     if (modal === null) return;
     modal.classList.add("active");
     overlay.classList.add("active");
+    modalTimer.innerHTML = displayMin + ":" + displaySec;
 }
 
 //Close Modal
