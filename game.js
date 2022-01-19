@@ -1,7 +1,13 @@
 const section = document.querySelector(".game-board");
 const playerLivesCounter = document.querySelector(".player-lives");
 const resetBtn = document.getElementById("reset-btn");
-let playerLives = 6;
+const timer = document.getElementById("timer");
+let playerLives = 7;
+let time = null;
+let minutes = 0;
+let seconds = 0;
+let displayMin = 0;
+let displaySec = 0;
 
 //UI set player lives
 playerLivesCounter.textContent = playerLives.toString();
@@ -55,6 +61,9 @@ const initGame = () => {
         card.addEventListener("click", (evn) => {
             card.classList.toggle("toggledCard");
             checkCards(evn);
+            if (time === null) {
+                startTimer();
+            }
         })
     });
     resetBtn.addEventListener("click", reset);
@@ -105,6 +114,7 @@ const reset = () => {
     section.style.pointerEvents = "none";
     cardData.forEach((item,index) => {
         cards[index].classList.remove("toggledCard");
+        cards[index].classList.remove("flipped");
         setTimeout(() => {
             //Enabling clicking again
             cards[index].style.pointerEvents = "all";
@@ -114,8 +124,40 @@ const reset = () => {
             section.style.pointerEvents = "all";
         }, 1000);
     });
-    playerLives = 6;
+    stopTimer();
+    minutes = 0;
+    seconds = 0;
+    timer.innerHTML = "Timer: 00:00";
+    playerLives = 7;
     playerLivesCounter.textContent = playerLives.toString();
+}
+
+//Start Timer
+const startTimer = () => {
+    time = setInterval( () => {
+        seconds++;
+        if (seconds === 60) {
+            minutes++;
+            seconds = 0;
+        }
+        if (seconds < 10) {
+            displaySec = "0" + seconds.toString();
+        } else {
+            displaySec = seconds;
+        }
+        if (minutes < 10) {
+            displayMin = "0" + minutes.toString();
+        } else {
+            displayMin = minutes;
+        }
+        timer.innerHTML = "Timer: " + displayMin + ":" + displaySec;
+    }, 1000);
+}
+
+//Stop Timer
+const stopTimer = () => {
+    clearInterval(time);
+    time = null;
 }
 
 initGame();
