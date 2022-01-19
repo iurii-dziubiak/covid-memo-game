@@ -2,12 +2,25 @@ const section = document.querySelector(".game-board");
 const playerLivesCounter = document.querySelector(".player-lives");
 const resetBtn = document.getElementById("reset-btn");
 const timer = document.getElementById("timer");
+const closeModalBtn = document.querySelectorAll("[data-close-button]")
+const overlay = document.getElementById("overlay")
 let playerLives = 7;
 let time = null;
 let minutes = 0;
 let seconds = 0;
 let displayMin = 0;
 let displaySec = 0;
+
+//Set Listeners
+const setListeners = () => {
+    resetBtn.addEventListener("click", reset);
+    closeModalBtn.forEach(button => {
+        button.addEventListener("click", () => {
+            const modal = button.closest(".modal");
+            closeModal(modal);
+        });
+    })
+}
 
 //UI set player lives
 playerLivesCounter.textContent = playerLives.toString();
@@ -40,7 +53,7 @@ const randomize = () => {
 }
 
 //Card generator
-const initGame = () => {
+const cardGenerator = () => {
     const cards = randomize();
     cards.forEach((item) => {
         const card = document.createElement("div");
@@ -66,7 +79,6 @@ const initGame = () => {
             }
         })
     });
-    resetBtn.addEventListener("click", reset);
 };
 
 //Check Cards
@@ -101,6 +113,8 @@ const checkCards = (evn) => {
     }
     //Check if we won the game
     if (toggledCards.length === 16) {
+        const modal = document.getElementById("modal");
+        openModal(modal);
         setTimeout(() => reset(), 800);
     }
 }
@@ -158,6 +172,25 @@ const startTimer = () => {
 const stopTimer = () => {
     clearInterval(time);
     time = null;
+}
+
+//Open Modal
+const openModal = (modal) => {
+    if (modal === null) return;
+    modal.classList.add("active");
+    overlay.classList.add("active");
+}
+
+//Close Modal
+const closeModal = (modal) => {
+    if (modal === null) return;
+    modal.classList.remove("active");
+    overlay.classList.remove("active");
+}
+
+const initGame = () => {
+    cardGenerator();
+    setListeners();
 }
 
 initGame();
