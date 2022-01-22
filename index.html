@@ -7,27 +7,25 @@
     <script defer src="game.js"></script>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>COVID Memory Game</h1>
-        </header>
+<div class="container">
+    <header>
+        <h1>COVID Memory Game</h1>
+    </header>
 
-        <section class="score-panel">
-            <h2>Score Panel</h2>
-            <h4>Lives: <span class="player-lives"></span></h4>
-            <div class="timer-container">
-                <h4><span id="timer">Timer: 00:00</span></h4>
-            </div>
-            <button id="reset-btn">Reset</button>
-        </section>
+    <section class="score-panel">
+        <h2>Score Panel</h2>
+        <h4>Lives: <span class="player-lives"></span></h4>
+        <h4><span id="timer">Timer: 00:00</span></h4>
+        <button id="reset-btn">Reset</button>
+    </section>
 
-        <section class="game-board"></section>
-    </div>
+    <section class="game-board"></section>
+</div>
 
-    <div class="modal" id="modal">
-        <h3>CONGRATULATIONS! YOU DID IT! YOUR TIME IS <span id="modal-timer"></span></h3>
-        <button data-close-button class="close-btn">&times;</button>
-    </div>
-    <div id="overlay"></div>
+<div class="modal" id="modal">
+    <h3><span id="modal-msg"></span></h3>
+    <button data-close-button class="close-btn">&times;</button>
+</div>
+<div id="overlay"></div>
 </body>
 </html>

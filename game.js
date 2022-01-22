@@ -1,10 +1,14 @@
 const section = document.querySelector(".game-board");
 const playerLivesCounter = document.querySelector(".player-lives");
 const resetBtn = document.getElementById("reset-btn");
-const timer = document.getElementById("timer");
-const modalTimer = document.getElementById("modal-timer");
-const closeModalBtn = document.querySelectorAll("[data-close-button]")
-const overlay = document.getElementById("overlay")
+const timerValue = document.getElementById("timer");
+const modalMsg = document.getElementById("modal-msg");
+const closeModalControls = document.querySelectorAll("[data-close-button]");
+const overlay = document.getElementById("overlay");
+const modal = document.getElementById("modal");
+const MODAL_MSG_WON = "CONGRATULATIONS! YOU DID IT! YOUR TIME WAS";
+const MODAL_MSG_LOSE = "SORRY, TRY AGAIN!";
+const TIMER_START_LABEL = "Timer: 00:00";
 let playerLives = 7;
 let time = null;
 let minutes = 0;
@@ -12,19 +16,6 @@ let seconds = 0;
 let displayMin = 0;
 let displaySec = 0;
 
-//Set Listeners
-const setListeners = () => {
-    resetBtn.addEventListener("click", reset);
-    closeModalBtn.forEach(button => {
-        button.addEventListener("click", () => {
-            const modal = button.closest(".modal");
-            closeModal(modal);
-        });
-    })
-}
-
-//UI set player lives
-playerLivesCounter.textContent = playerLives.toString();
 
 //Generate the board
 const getData = () => [
@@ -107,15 +98,16 @@ const checkCards = (evn) => {
             });
             playerLives--;
             playerLivesCounter.textContent = playerLives.toString();
+            //Check if user lose the game
             if (playerLives === 0) {
+                openModal(modal, false);
                 setTimeout(() => reset(), 800);
             }
         }
     }
-    //Check if we won the game
+    //Check if user won the game
     if (toggledCards.length === 16) {
-        const modal = document.getElementById("modal");
-        openModal(modal);
+        openModal(modal, true);
         setTimeout(() => reset(), 800);
     }
 }
@@ -142,9 +134,9 @@ const reset = () => {
     stopTimer();
     minutes = 0;
     seconds = 0;
-    timer.innerHTML = "Timer: 00:00";
+    timerValue.innerText = TIMER_START_LABEL;
     playerLives = 7;
-    playerLivesCounter.textContent = playerLives.toString();
+    playerLivesCounter.innerText = playerLives.toString();
 }
 
 //Start Timer
@@ -165,7 +157,7 @@ const startTimer = () => {
         } else {
             displayMin = minutes;
         }
-        timer.innerHTML = "Timer: " + displayMin + ":" + displaySec;
+        timerValue.innerText = "Timer: " + displayMin + ":" + displaySec;
     }, 1000);
 }
 
@@ -176,23 +168,49 @@ const stopTimer = () => {
 }
 
 //Open Modal
-const openModal = (modal) => {
+const openModal = (modal, isWon) => {
     if (modal === null) return;
     modal.classList.add("active");
-    overlay.classList.add("active");
-    modalTimer.innerHTML = displayMin + ":" + displaySec;
+    if (isWon) {
+        overlay.classList.add("blue");
+        modalMsg.innerText = MODAL_MSG_WON + " " + displayMin + ":" + displaySec;
+    } else {
+        modal.classList.add("lose");
+        overlay.classList.add("red");
+        modalMsg.innerText = MODAL_MSG_LOSE;
+    }
 }
 
 //Close Modal
 const closeModal = (modal) => {
     if (modal === null) return;
     modal.classList.remove("active");
-    overlay.classList.remove("active");
+    modal.classList.remove("lose");
+    overlay.classList.remove("blue");
+    overlay.classList.remove("red");
+}
+
+//Set Listeners for page controls
+const setControlListeners = () => {
+    resetBtn.addEventListener("click", reset);
+    closeModalControls.forEach(button => {
+        button.addEventListener("click", () => {
+            const modal = button.closest(".modal");
+            closeModal(modal);
+        });
+    })
+}
+
+//UI set player lives
+const setUIscorePanel = () => {
+    playerLivesCounter.innerText = playerLives.toString();
+    timerValue.innerText = TIMER_START_LABEL;
 }
 
 const initGame = () => {
+    setControlListeners();
+    setUIscorePanel();
     cardGenerator();
-    setListeners();
 }
 
 initGame();
