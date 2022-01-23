@@ -8,7 +8,7 @@ const overlay = document.getElementById("overlay");
 const modal = document.getElementById("modal");
 const MODAL_MSG_WON = "CONGRATULATIONS! YOU DID IT! YOUR TIME WAS";
 const MODAL_MSG_LOSE = "SORRY, TRY AGAIN!";
-const TIMER_START_LABEL = "Timer: 00:00";
+const TIMER_START_LABEL = "00:00";
 let playerLives = 7;
 let time = null;
 let minutes = 0;
@@ -157,7 +157,7 @@ const startTimer = () => {
         } else {
             displayMin = minutes;
         }
-        timerValue.innerText = "Timer: " + displayMin + ":" + displaySec;
+        timerValue.innerText = displayMin + ":" + displaySec;
     }, 1000);
 }
 
