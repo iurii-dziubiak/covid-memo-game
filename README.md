@@ -8,7 +8,7 @@ I've chosen on a vanilla JS to use just the basics of Javascript.
 I try to create something fun, creative, and motivating game during those 
 really hard days of Covid-19.
 
-## During working on this project I have learnt:
+## During work on this project I have learned:
 - Finding DOM elements in the document tree.
 - Manipulate the DOM using JavaScript.
 - Handle user interactions with JavaScript event handlers.
