@@ -15,8 +15,7 @@ really hard days of Covid-19.
 - Use HTML data attributes.
 - Use CSS styling.
 
-## ⚡ LET'S PLAY ⚡
-### https://iurii-dziubiak.github.io/covid-memo-game/
-
-## 🔥 SKILLS 🔥
+## Skills:
 [![My Skills](https://skills.thijs.gg/icons?i=js,html,css,git&theme=light)](https://skills.thijs.gg)
+
+### ⚡ LET'S PLAY ⚡ https://iurii-dziubiak.github.io/covid-memo-game/
