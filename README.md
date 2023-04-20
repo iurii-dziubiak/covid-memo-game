@@ -1,6 +1,6 @@
 # COVID Memory Game
 
-![](readme_GIF.gif)
+![](readme_image.gif)
 
 ## Story
 My task was to create a game in the browser. 
